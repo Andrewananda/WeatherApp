@@ -17,7 +17,6 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 	private var currentLocation: CLLocation!
 	private var locationManager = CLLocationManager()
 	private var climate: [List1] = []
-	private let widthAnchor = CGFloat(120)
 	
 
     override func viewDidLoad() {
@@ -34,7 +33,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 	private func registerCells() {
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.register(HistoryDegreeCell.self, forCellReuseIdentifier: "cell")
+		tableView.register(HistoryDegreeCell.self, forCellReuseIdentifier: K.cells.history_cell)
 	}
 	
 	
@@ -92,7 +91,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		let lbl = UILabel()
 		lbl.translatesAutoresizingMaskIntoConstraints = false
 		lbl.textColor = .white
-		lbl.text = "Min"
+		lbl.text = K.home.lblMin
 		return lbl
 	}()
 	
@@ -120,7 +119,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		let lbl = UILabel()
 		lbl.translatesAutoresizingMaskIntoConstraints = false
 		lbl.textColor = .white
-		lbl.text = "Current"
+		lbl.text = K.home.lblCurrent
 		return lbl
 	}()
 	
@@ -141,7 +140,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		let lbl = UILabel()
 		lbl.translatesAutoresizingMaskIntoConstraints = false
 		lbl.textColor = .white
-		lbl.text = "Max"
+		lbl.text = K.home.lblMax
 		return lbl
 	}()
 	
@@ -168,16 +167,16 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 			self?.lblMaxDegrees.text = "\(res.main.tempMax)".toDegrees()
 						
 			if res.weather[0].main == WeatherConditions.cloudy.rawValue {
-				self?.imgBackground.image = UIImage(named: "sea_cloudy")
+				self?.imgBackground.image = UIImage(named: K.images.sea_cloudy)
 				self?.view.backgroundColor = getColor(weatherType: .cloudy)
 			}else if res.weather[0].main == WeatherConditions.rainy.rawValue {
-				self?.imgBackground.image = UIImage(named: "sea_rainy")
+				self?.imgBackground.image = UIImage(named: K.images.sea_rainy)
 				self?.view.backgroundColor = getColor(weatherType: .rainy)
 			}else if res.weather[0].main == WeatherConditions.sunny.rawValue {
-				self?.imgBackground.image = UIImage(named: "sea_sunny")
+				self?.imgBackground.image = UIImage(named: K.images.sea_sunny)
 				self?.view.backgroundColor = getColor(weatherType: .sunny)
 			}else {
-				self?.imgBackground.image = UIImage(named: "sea_sunny")
+				self?.imgBackground.image = UIImage(named:  K.images.sea_sunny)
 				self?.view.backgroundColor = getColor(weatherType: .sunny)
 			}
 			
@@ -210,7 +209,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 			self.viewModel.fetchCurrentWeather(lon: self.currentLocation.coordinate.longitude, lat: self.currentLocation.coordinate.latitude)
 		}else {
 			self.hideProgressDialog()
-			showAlert(title: "", message: "No internet connection, check your conectivity and try again", vc: self) { action in
+			showAlert(title: "", message: K.strings.networkMessage, vc: self) { action in
 				UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
 			}
 		}
@@ -222,7 +221,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		let status  = CLLocationManager.authorizationStatus()
 		
 		
-		self.showProgressDialog(message: "Please Wait...")
+		self.showProgressDialog(message: K.strings.loadingMessage)
 		
 		if status == .notDetermined {
 			locationManager.delegate = self
@@ -339,7 +338,7 @@ extension HomeVC: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HistoryDegreeCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: K.cells.history_cell, for: indexPath) as! HistoryDegreeCell
 		cell.backgroundColor = .clear
 		cell.selectionStyle = .none
 		cell.setupData(data: climate[indexPath.row])
@@ -348,7 +347,7 @@ extension HomeVC: UITableViewDataSource, UITableViewDelegate {
 	
 	
 	func showPermissionDialog() {
-		showAlert(title: "", message: "This App requires location permission to get your current weather location, give this app location perission in your settings", vc: self) { action in
+		showAlert(title: "", message: K.strings.locationPermission, vc: self) { action in
 			UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
 		}
 	}

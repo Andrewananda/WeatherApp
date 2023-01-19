@@ -14,4 +14,29 @@ struct K {
 		static let historyUrl = "forecast"
 		static let currentUrl = "weather"
 	}
+	
+	struct strings {
+		static let locationPermission = "This App requires location permission to get your current weather location, give this app location perission in your settings"
+		static let networkMessage = "No internet connection, check your conectivity and try again"
+		static let loadingMessage = "Please Wait..."
+	}
+	
+	struct home {
+		static let lblMax = "Max"
+		static let lblCurrent = "Current"
+		static let lblMin = "Min"
+	}
+	
+	struct images {
+		static let sea_cloudy = "sea_cloudy"
+		static let sea_rainy = "sea_rainy"
+		static let sea_sunny = "sea_sunny"
+		static let partly_sunny = "partlysunny"
+		static let rain = "rain"
+		static let clear = "clear"
+	}
+	
+	struct cells {
+		static let history_cell = "cell"
+	}
 }

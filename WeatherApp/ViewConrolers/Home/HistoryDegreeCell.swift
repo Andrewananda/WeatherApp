@@ -50,11 +50,11 @@ class HistoryDegreeCell: UITableViewCell {
 		lblTitle.text = getFormatedDate(dateString: data.dtTxt)
 		lblDegrees.text = NSString(format:"\(data.main.temp)%@" as NSString, "\u{00B0}") as String
 		if data.weather[0].main == "Clouds" {
-			imgWeather.image = UIImage(named: "partlysunny")
+			imgWeather.image = UIImage(named: K.images.partly_sunny)
 		}else if data.weather[0].main == "Rain" {
-			imgWeather.image = UIImage(named: "rain")
+			imgWeather.image = UIImage(named: K.images.rain)
 		}else {
-			imgWeather.image = UIImage(named: "clear")
+			imgWeather.image = UIImage(named: K.images.clear)
 		}
 	}
 	
