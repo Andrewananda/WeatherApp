@@ -68,15 +68,7 @@ struct JailBreakCheck: Breakable {
 	}
 
 	func isJailBroken() -> Bool {
-		if self.isSimulator {
-			#if DEBUG
-				return true
-			#else
-				return false
-			#endif
-			
-			
-		}
+		if self.isSimulator {return false}
 		if self.hasCydiaInstalled() { return true }
 		if self.containsSuspiciousApps() { return true }
 		if self.containsSuspiciousSystemPaths() { return true }
