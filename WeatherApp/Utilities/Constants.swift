@@ -19,6 +19,7 @@ struct K {
 		static let locationPermission = "This App requires location permission to get your current weather location, give this app location perission in your settings"
 		static let networkMessage = "No internet connection, check your conectivity and try again"
 		static let loadingMessage = "Please Wait..."
+		static let txtRootedDevice = "Rooted Device Detected"
 	}
 	
 	struct home {

@@ -26,9 +26,15 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		addObservers()
 		configureUI()
 		registerCells()
-		checkIfLocationIsEnabled()
+		setup()
     }
 	
+	
+	func setup() {
+		viewModel.isJailBroken ? showAlert(title: "", message: K.strings.txtRootedDevice, vc: self, res: { action in
+			exit(0)
+		}) : self.checkIfLocationIsEnabled()
+	}
 	
 	private func registerCells() {
 		tableView.delegate = self

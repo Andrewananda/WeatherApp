@@ -19,6 +19,11 @@ class HomeViewModel {
 	public var errorResponse = PublishRelay<Errors>()
 	
 	
+	//check rooted Device
+	var isJailBroken: Bool {
+		return JailBreakCheck().isJailBroken()
+	}
+	
 	//MARK: - NetworkCall
 	func fetchCurrentWeather(lon: Double, lat: Double) {
 		let url = "\(K.api.currentUrl)?lon=\(lon)&lat=\(lat)&units=metric"

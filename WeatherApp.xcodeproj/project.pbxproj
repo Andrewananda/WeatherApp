@@ -28,6 +28,8 @@
 		8CE58FF929768FD8003D8B70 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE58FF829768FD8003D8B70 /* Utilities.swift */; };
 		8CE58FFB2976A6F3003D8B70 /* HistoryDegreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE58FFA2976A6F3003D8B70 /* HistoryDegreeCell.swift */; };
 		8CE58FFE2976FA7F003D8B70 /* ProgressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE58FFD2976FA7F003D8B70 /* ProgressVC.swift */; };
+		8CF9E90529793CE800AF474B /* JailBroken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9E90429793CE800AF474B /* JailBroken.swift */; };
+		8CF9E90829793FF300AF474B /* JailBrokenTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9E90729793FF300AF474B /* JailBrokenTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		8CE58FF829768FD8003D8B70 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8CE58FFA2976A6F3003D8B70 /* HistoryDegreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDegreeCell.swift; sourceTree = "<group>"; };
 		8CE58FFD2976FA7F003D8B70 /* ProgressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressVC.swift; sourceTree = "<group>"; };
+		8CF9E90429793CE800AF474B /* JailBroken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBroken.swift; sourceTree = "<group>"; };
+		8CF9E90729793FF300AF474B /* JailBrokenTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JailBrokenTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 		8C470C7229757E4C0000BC77 /* WeatherAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				8CF9E90629793FDD00AF474B /* JailBreak */,
 				8C73D6F4297816D400B40E14 /* Utilities */,
 				8C470C7329757E4C0000BC77 /* WeatherAppTests.swift */,
 			);
@@ -177,6 +182,7 @@
 				8C470C99297583260000BC77 /* Constants.swift */,
 				8CE58FF829768FD8003D8B70 /* Utilities.swift */,
 				8CE58FFD2976FA7F003D8B70 /* ProgressVC.swift */,
+				8CF9E90429793CE800AF474B /* JailBroken.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -222,6 +228,14 @@
 				8CE58FFA2976A6F3003D8B70 /* HistoryDegreeCell.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		8CF9E90629793FDD00AF474B /* JailBreak */ = {
+			isa = PBXGroup;
+			children = (
+				8CF9E90729793FF300AF474B /* JailBrokenTest.swift */,
+			);
+			path = JailBreak;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C470C9A297583260000BC77 /* Constants.swift in Sources */,
+				8CF9E90529793CE800AF474B /* JailBroken.swift in Sources */,
 				8CE58FF929768FD8003D8B70 /* Utilities.swift in Sources */,
 				8C470C5D29757E4A0000BC77 /* AppDelegate.swift in Sources */,
 				8CC731632975959E0041AAFB /* HomeViewModel.swift in Sources */,
@@ -384,6 +399,7 @@
 			files = (
 				8C73D6F62978171C00B40E14 /* UtilitiesTest.swift in Sources */,
 				8C470C7429757E4C0000BC77 /* WeatherAppTests.swift in Sources */,
+				8CF9E90829793FF300AF474B /* JailBrokenTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
