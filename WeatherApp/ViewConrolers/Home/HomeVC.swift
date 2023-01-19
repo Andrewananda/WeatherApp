@@ -25,12 +25,11 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		
 		self.view.backgroundColor = .white
 		addObservers()
-		requestLocationPermision()
 		configureUI()
 		registerCells()
-		
-		locationManager.delegate = self
+		checkIfLocationIsEnabled()
     }
+	
 	
 	private func registerCells() {
 		tableView.delegate = self
@@ -203,60 +202,55 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		viewModel.fetchWeatherHistory(lon: currentLocation.coordinate.longitude, lat: currentLocation.coordinate.latitude)
 	}
 	
-	private func requestLocationPermision() {
-		
-		showProgressDialog(message: "Please wait...")
-		
+	
+	private func fetchCurrentWeather() {
 		if isConnectedToInternet() {
-			
-			
-			let longitude = self.locationManager.location?.coordinate.longitude ?? nil
-			let latitude = self.locationManager.location?.coordinate.latitude ?? nil
-			
-			
-			if latitude == nil || longitude == nil {
-				self.hideProgressDialog()
-				self.showPermissionDialog()
-			}else {
-				guard let currentLocation = locationManager.location else {
-					self.hideProgressDialog()
-					self.showPermissionDialog()
-					return
-				}
-				
-				self.currentLocation = currentLocation
-				self.viewModel.fetchCurrentWeather(lon: currentLocation.coordinate.longitude, lat: currentLocation.coordinate.latitude)
-			}
-			
+			self.viewModel.fetchCurrentWeather(lon: self.currentLocation.coordinate.longitude, lat: self.currentLocation.coordinate.latitude)
 		}else {
 			self.hideProgressDialog()
-			showAlert(title: "", message: "“No internet Connection, Check your connectivity and try again!", vc: self) { action in
+			showAlert(title: "", message: "No internet connection, check your conectivity and try again", vc: self) { action in
 				UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
 			}
 		}
+	}
+	
+	func checkIfLocationIsEnabled() {
+		
+		locationManager.delegate = nil
+		let status  = CLLocationManager.authorizationStatus()
 		
 		
+		self.showProgressDialog(message: "Please Wait...")
+		
+		if status == .notDetermined {
+			locationManager.delegate = self
+			locationManager.requestWhenInUseAuthorization()
+		} else if status == .denied || status == .restricted {
+			self.hideProgressDialog()
+			showPermissionDialog()
+		} else if  status == .authorizedAlways || status == .authorizedWhenInUse {
+			locationManager.delegate = self
+			locationManager.startUpdatingLocation()
+			
+			guard let currentLocation = self.locationManager.location else {
+				return
+			}
+			self.currentLocation = currentLocation
+			self.fetchCurrentWeather()
+			
+		}
 	}
 	
 	func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-		if CLLocationManager.locationServicesEnabled() {
-			switch CLLocationManager.authorizationStatus() {
-			case .notDetermined:
-				locationManager.requestWhenInUseAuthorization()
-			case .restricted, .denied:
-				showPermissionDialog()
-			case .authorizedAlways, .authorizedWhenInUse:
-				guard let currentLocation = locationManager.location else {
-					return
-				}
-				self.currentLocation = currentLocation
-				viewModel.fetchCurrentWeather(lon: currentLocation.coordinate.longitude, lat: currentLocation.coordinate.latitude)
-			@unknown default:
-				break
-			}
-		} else {
-			locationManager.requestWhenInUseAuthorization()
-		}
+		checkIfLocationIsEnabled()
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		checkIfLocationIsEnabled()
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		checkIfLocationIsEnabled()
 	}
     
 
