@@ -192,6 +192,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 		
 		
 		viewModel.errorResponse.subscribe(onNext: {[weak self] res in
+			self?.hideProgressDialog()
 			showAlert(title: "", message: res.get(), vc: HomeVC()) { action in
 				self?.dismiss(animated: false)
 			}
@@ -204,6 +205,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate {
 	
 	
 	private func fetchCurrentWeather() {
+		locationManager.stopUpdatingLocation()
 		if isConnectedToInternet() {
 			self.viewModel.fetchCurrentWeather(lon: self.currentLocation.coordinate.longitude, lat: self.currentLocation.coordinate.latitude)
 		}else {

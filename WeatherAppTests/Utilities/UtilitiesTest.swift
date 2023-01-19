@@ -44,5 +44,10 @@ final class UtilitiesTest: XCTestCase {
 		let expectedOutput = "Thursday"
 		XCTAssertEqual(getFormatedDate(dateString: input), expectedOutput)
 	}
+	
+	func testWeatherColorChange() {
+		let expectedOutput = UIColor(named: "CloudyColor")
+		XCTAssertEqual(getColor(weatherType: .cloudy), expectedOutput)
+	}
 
 }

@@ -19,6 +19,7 @@ struct WeatherHistoryResponseNew: Codable {
 
 // MARK: - List
 struct List1: Codable {
+	
 	let dt: Int
 	let main: Main1
 	let weather: [Weather]
